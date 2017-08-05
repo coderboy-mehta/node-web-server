@@ -1,6 +1,10 @@
 const express=require('express');
 const fs=require('fs');
 const hbs =require('hbs');
+
+const port =process.env.PORT || 3000;
+
+
 var app=express();
 
 app.set('view engine','hbs');
@@ -17,9 +21,9 @@ fs.appendFile('server.log',log+"\n",(err)=>{
 });
 next();
 });
-app.use((req,res,next)=>{
-  res.render('maintains.hbs');
-});
+// app.use((req,res,next)=>{
+//   res.render('maintains.hbs');
+// });
 app.use(express.static(__dirname+`/public`));
 
 app.get('/',(req,res)=>{
@@ -50,6 +54,6 @@ app.get('/home',(req,res)=>{
     currentYear: new Date().getFullYear()
   });
 });
-app.listen(3000,()=>{
-  console.log('server is setup on localhost :3000');
+app.listen(port,()=>{
+  console.log(`server is setup on localhost :${port}`);
 });
